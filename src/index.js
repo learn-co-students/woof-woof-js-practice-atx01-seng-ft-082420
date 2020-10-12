@@ -1,13 +1,42 @@
-//Get all dogs
-fetch('http://localhost:3000/pups')
-.then(function(res) {
-    return res.json()
-})
-.then(function(pups) {
-    for(const pup of pups) {
-        addPupName(pup)
+let filter = document.querySelector('#good-dog-filter')
+let filtered = false
+fetchDogs(filtered)
+filter.addEventListener('click', function(e) {
+    let newFiltered
+    if (e.target.innerHTML == 'Filter good dogs: OFF') {
+        newFiltered = true
+        e.target.innerHTML = 'Filter good dogs: ON'
+    } else {
+        newFiltered = false
+        e.target.innerHTML = 'Filter good dogs: OFF' 
     }
+    fetchDogs(newFiltered)
 })
+
+function fetchDogs(filterToggle) { 
+    const div = document.getElementById('dog-bar')
+    while (div.firstChild) {
+        div.removeChild(div.firstChild);
+    }
+    
+    fetch('http://localhost:3000/pups')
+    .then(function(res) {
+        return res.json()
+    })
+    .then(function(pups) {
+        if (filterToggle) {
+            for(const pup of pups) {
+                if (pup.isGoodDog) {
+                    addPupName(pup)
+                }
+            }
+        } else {
+            for(const pup of pups) {
+                addPupName(pup)
+            }
+        }
+    })
+}
 
 //Add dog name span
 function addPupName(pup) {
