@@ -23,30 +23,50 @@ function renderDog(dog) {
         const dogName = document.createElement('h2')
         dogName.innerText = dog.name
         const dogBtn = document.createElement('button')
+        const dangerBtn = document.createElement('button')
+        dangerBtn.className = 'btn btn-danger'
+        dangerBtn.innerText = "delete"
+
+        
         dog.isGoodDog 
         ? (dogBtn.innerText = "Good Dog!")
         : (dogBtn.innerText = "Bad Dog!")
-        dogCard.append(dogImage, dogName, dogBtn)
-            dogBtn.addEventListener('click', e => {
-                // console.log(e.target.innerText)
-                let dogStatus 
-                if (e.target.innerText === "Good Dog!") {
-                    dogStatus = false
-                    dogBtn.innerText = "Bad Dog!"
-                } else if (e.target.innerText === "Bad Dog!") {
-                    dogStatus = true
-                    dogBtn.innerText = "Good Dog!"
-                }
-                fetch(url +`/${dog.id}`, {
-                    method: 'PATCH',
-                    headers: {
-                        "Content-type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        isGoodDog: dogStatus
-                    })
+        dogCard.append(dogImage, dogName, dogBtn, dangerBtn)
+        
+        
+        
+        dogBtn.addEventListener('click', e => {
+            // console.log(e.target.innerText)
+            let dogStatus 
+            if (e.target.innerText === "Good Dog!") {
+                dogStatus = false
+                dogBtn.innerText = "Bad Dog!"
+            } else if (e.target.innerText === "Bad Dog!") {
+                dogStatus = true
+                dogBtn.innerText = "Good Dog!"
+            }
+            fetch(url +`/${dog.id}`, {
+                method: 'PATCH',
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    isGoodDog: dogStatus
                 })
-                .then(res => res.json())
+            })
+            .then(res => res.json())
+        })
+        dangerBtn.addEventListener('click', () => {
+            fetch(url + `/${dog.id}`, {
+                method: 'DELETE'
+            })
+            .then(function() {
+                span.remove()
+                dogImage.remove()
+                dogName.remove()
+                dogBtn.remove()
+                dangerBtn.remove()
             })
         })
-    }
+    })
+}

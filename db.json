@@ -1,6 +1,30 @@
 {
   "pups": [
     {
+      "id": 3,
+      "name": "Skittles",
+      "isGoodDog": true,
+      "image": "https://curriculum-content.s3.amazonaws.com/js/woof-woof/dog_3.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Buttercup",
+      "isGoodDog": false,
+      "image": "https://curriculum-content.s3.amazonaws.com/js/woof-woof/dog_4.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Mittens",
+      "isGoodDog": true,
+      "image": "https://curriculum-content.s3.amazonaws.com/js/woof-woof/dog_1.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Middens",
+      "isGoodDog": true,
+      "image": "https://curriculum-content.s3.amazonaws.com/js/woof-woof/dog_2.jpg"
+    },
+    {
       "id": 1,
       "name": "Mr. Bonkers",
       "isGoodDog": true,
